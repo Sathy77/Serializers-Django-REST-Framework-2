@@ -4,6 +4,7 @@ from book.api.serializers import *
 from rest_framework.decorators import api_view
 from rest_framework.response import *
 
+#get api
 @api_view(['GET'])
 def authorlist(request):
 	author = Author.objects.all()
@@ -34,7 +35,7 @@ def booklist(request):
 	bookserializer = BookSerializer(book, many=True)
 	return Response(bookserializer.data)
 
-
+#post api
 @api_view(['POST'])
 def authorinsert(request):
 	serializer = AuthorSerializer(data= request.data)
@@ -42,8 +43,47 @@ def authorinsert(request):
 	if serializer.is_valid():
 		serializer.save()
 
-	return Response("serializer.data")
+	return Response(serializer.data)
 
+
+@api_view(['POST'])
+def publisherinsert(request):
+	serializer = PublisherSerializer(data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)
+
+
+@api_view(['POST'])
+def booktypeinsert(request):
+	serializer = BookTypeSerializer(data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)
+
+@api_view(['POST'])
+def libraryinsert(request):
+	serializer = LibrarySerializer(data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)
+
+@api_view(['POST'])
+def bookinsert(request):
+	serializer = BookSerializer(data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)
+
+#update api
 @api_view(['POST'])
 def authorupdate(request, pk):
 	author = Author.objects.get(id=pk)
@@ -54,6 +94,7 @@ def authorupdate(request, pk):
 
 	return Response(serializer.data)
 
+#delete api
 @api_view(['DELETE'])
 def authorDelete(request, pk):
 	author = Author.objects.get(id=pk)
