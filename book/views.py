@@ -35,3 +35,30 @@ def booklist(request):
 	return Response(bookserializer.data)
 
 
+@api_view(['POST'])
+def authorinsert(request):
+	serializer = AuthorSerializer(data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response("serializer.data")
+
+@api_view(['POST'])
+def authorupdate(request, pk):
+	author = Author.objects.get(id=pk)
+	serializer = AuthorSerializer(instance= author, data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)
+
+@api_view(['DELETE'])
+def authorDelete(request, pk):
+	author = Author.objects.get(id=pk)
+	author.delete
+
+	return Response("Deleted Author")
+	
+
