@@ -9,23 +9,23 @@ class AuthorSerializer(serializers.ModelSerializer):
 class PublisherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Publisher
-        fields =['name', 'campany', 'address']    
+        fields ='__all__'   
 
 class BookTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookType
-        fields =['type']   
+        fields ='__all__'    
 
 class LibrarySerializer(serializers.ModelSerializer):
     class Meta:
         model = Library
-        fields =['name', 'address', 'email']           
+        fields ='__all__'          
 
-class BookSerializer(serializers.ModelSerializer):
-    booktype = BookTypeSerializer(many= False)
+class BookSerializer(serializers.ModelSerializer): #for POST in serializer we only use ID for foreign key.
+    booktype = BookTypeSerializer(many= False) 
     author = AuthorSerializer(many= True)
     publisher = PublisherSerializer(many= True)
     library = LibrarySerializer(many= True)
     class Meta:
         model = Book
-        fields =['book_name', 'booktype', 'author', 'publisher', 'library']               
+        fields ='__all__' 

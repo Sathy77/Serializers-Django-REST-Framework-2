@@ -35,7 +35,7 @@ class Library(models.Model):
 
 class Book(models.Model):
     book_name = models.CharField(max_length=100, null=False)
-    booktype = models.ForeignKey(BookType, on_delete=models.SET_NULL, null=True)
+    booktype = models.ForeignKey(BookType, on_delete=models.SET_NULL, blank=True, null=True)
     author = models.ManyToManyField(Author, blank=True, null=True)
     publisher = models.ManyToManyField(Publisher, blank=True, null=True)
     library = models.ManyToManyField(Library, null=True, blank=True)

@@ -94,6 +94,45 @@ def authorupdate(request, pk):
 
 	return Response(serializer.data)
 
+@api_view(['POST'])
+def publisherupdate(request, pk):
+	publisher = Publisher.objects.get(id=pk)
+	serializer = PublisherSerializer(instance= publisher, data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+
+	return Response(serializer.data)	
+
+@api_view(['POST'])
+def bookTypeupdate (request, pk):
+	bookType = BookType.objects.get(id=pk)
+	serializer = BookTypeSerializer(instance= bookType, data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+	return Response(serializer.data)
+
+@api_view(['POST'])
+def libraryupdate (request, pk):
+	library = Library.objects.get(id=pk)
+	serializer = LibrarySerializer(instance= library, data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+	return Response(serializer.data)
+
+@api_view(["POST"])
+def bookupdate (request, pk):
+	book = Book.objects.get(id=pk)
+	serializer = BookSerializer(instance= book, data= request.data)
+
+	if serializer.is_valid():
+		serializer.save()
+	return Response(serializer.data)
+
+
+
 #delete api
 @api_view(['DELETE'])
 def authorDelete(request, pk):
